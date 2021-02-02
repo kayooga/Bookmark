@@ -10,6 +10,8 @@ use App\Http\Controllers\User\Auth\NewPasswordController;
 use App\Http\Controllers\User\Auth\PasswordResetLinkController;
 use App\Http\Controllers\User\Auth\RegisteredUserController;
 use App\Http\Controllers\User\Auth\VerifyEmailController;
+use App\Http\Controllers\BookmarksController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,3 +83,6 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth:users')
     ->name('logout');
+
+Route::get('/bookmarks', [BookmarksController::class, 'index'])
+    ->name('bookmarks');

@@ -14,7 +14,9 @@ class BookmarksController extends Controller
      */
     public function index()
     {
-        dd(Bookmarks::all());
+        $bookmarks = Bookmarks::paginate(15);
+
+        return view('bookmarks.index',compact('bookmarks'));
     }
 
     /**

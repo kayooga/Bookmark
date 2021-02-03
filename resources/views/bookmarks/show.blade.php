@@ -12,23 +12,24 @@
       <!-- Validation Errors -->
       {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
         <table>
-          <caption>ブックマーク一覧</caption>
-          <thead>
+          <caption>ブックマーク詳細</caption>
             <tr>
-              <th width="50">ID</th>
-              <th>タイトル</th>
+              <th width="80">タイトル</th>
+              <td>{{ $bookmark->title }}</td>
             </tr>
-          </thead>
-          @foreach ($bookmarks as $bookmark)
             <tr>
-              <td>{{ $bookmark->id }}</td>
-              <td><a href="{{ route('user.bookmarks.show',$bookmark->id) }}">{{ $bookmark->title }}</a></td>
+              <th>URL</th>
+              <td><a href="{{ $bookmark->url }}">{{ $bookmark->url }}</a></td>
             </tr>
-              
-          @endforeach
+            <tr>
+              <th>概要</th>
+              <td>{{ $bookmark->description }}</td>
+            </tr>
+            <tr>
+              <th>作成日</th>
+              <td>{{ $bookmark->created_at->format('Y年m月d日') }}</td>
+            </tr>
         </table>
-        <br>
-        {{ $bookmarks->links() }}
       
   </x-auth-card>
 </x-guest-layout>

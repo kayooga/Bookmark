@@ -86,3 +86,8 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 
 Route::get('/bookmarks', [BookmarksController::class, 'index'])
     ->name('bookmarks');
+
+Route::get('/bookmarks/{id}', [BookmarksController::class, 'show'])
+    ->where('id', '[0-9]+')
+    ->name('bookmarks.show');
+

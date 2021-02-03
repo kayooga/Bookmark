@@ -46,9 +46,12 @@ class BookmarksController extends Controller
      * @param  \App\Models\Models\Bookmarks  $bookmarks
      * @return \Illuminate\Http\Response
      */
-    public function show(Bookmarks $bookmarks)
+    public function show($id)
     {
-        //
+        //findOrFail取得するデータがない場合は処理をとめてエラー画面を表示させる
+        $bookmark = Bookmarks::findOrFail($id);
+
+        return view('bookmarks.show',compact('bookmark'));
     }
 
     /**

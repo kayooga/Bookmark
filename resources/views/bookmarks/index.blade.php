@@ -11,6 +11,9 @@
 
       <!-- Validation Errors -->
       {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
+      <div class="mb-3">  
+        <a href="{{ route('user.bookmarks.create') }}" class="btn-primary">新規登録</a>
+      </div>
         <table>
           <caption>ブックマーク一覧</caption>
           <thead>

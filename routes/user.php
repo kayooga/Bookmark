@@ -85,9 +85,18 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
 Route::get('/bookmarks', [BookmarksController::class, 'index'])
-    ->name('bookmarks');
+    ->name('bookmarks.index');
 
 Route::get('/bookmarks/{id}', [BookmarksController::class, 'show'])
     ->where('id', '[0-9]+')
     ->name('bookmarks.show');
 
+Route::get('/bookmarks/create', [BookmarksController::class, 'create'])
+    ->name('bookmarks.create');
+
+Route::post('/bookmarks', [BookmarksController::class, 'store'])
+    ->name('bookmarks.store');
+
+
+//レコードの表示、作成、更新、削除機能をまとめて設定する
+// Route::resource('/bookmarks',BookmarksController::class);

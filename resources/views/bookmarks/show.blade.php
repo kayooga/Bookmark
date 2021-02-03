@@ -30,6 +30,9 @@
               <td>{{ $bookmark->created_at->format('Y年m月d日') }}</td>
             </tr>
         </table>
+        <div>
+          <a href="{{ route('user.bookmarks.index')}}" class="btn btn-secondary">戻る</a>
+        </div>
       
   </x-auth-card>
 </x-guest-layout>

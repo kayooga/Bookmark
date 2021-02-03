@@ -62,8 +62,10 @@ class BookmarksController extends Controller
      * @param  \App\Models\Models\Bookmarks  $bookmarks
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bookmarks $bookmarks)
+    public function edit($id)
     {
+        $bookmark = Bookmarks::findOrFail($id);
+
         return view('bookmarks.edit',compact('bookmark'));
     }
 
@@ -74,9 +76,18 @@ class BookmarksController extends Controller
      * @param  \App\Models\Models\Bookmarks  $bookmarks
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bookmarks $bookmarks)
+    public function update(Request $request)
     {
-        //
+        $input = $request->all();
+        $bookmark = Bookmarks::find($input['id']);
+        $bookmark->fill([
+            'title' => $input['title'],
+            'url' => $input['url'],
+            'description' => $input['description']
+        ]);
+        $bookmark->save();
+
+        return redirect()->route('user.bookmarks.edit',$bookmark);
     }
 
     /**

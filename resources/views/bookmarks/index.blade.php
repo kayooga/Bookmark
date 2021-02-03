@@ -20,12 +20,17 @@
             <tr>
               <th width="50">ID</th>
               <th>タイトル</th>
+              <th>アクション</th>
             </tr>
           </thead>
           @foreach ($bookmarks as $bookmark)
             <tr>
               <td>{{ $bookmark->id }}</td>
-              <td><a href="{{ route('user.bookmarks.show',$bookmark->id) }}">{{ $bookmark->title }}</a></td>
+              <td><a href="{{ $bookmark->url }}">{{ $bookmark->title }}</a></td>
+              <td>
+              <a href="{{ route('user.bookmarks.show',$bookmark->id) }}" class="btn btn-secondary btn-sm">表示</a>
+                <a href="{{ route('user.bookmarks.edit',$bookmark->id) }}" class="btn btn-secondary btn-sm">編集</a>
+              </td>
             </tr>
               
           @endforeach

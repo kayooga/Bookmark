@@ -94,8 +94,15 @@ Route::get('/bookmarks/{id}', [BookmarksController::class, 'show'])
 Route::get('/bookmarks/create', [BookmarksController::class, 'create'])
     ->name('bookmarks.create');
 
-Route::post('/bookmarks', [BookmarksController::class, 'store'])
+Route::post('/bookmarks/store', [BookmarksController::class, 'store'])
     ->name('bookmarks.store');
+
+Route::get('/bookmarks/edit/{id}', [BookmarksController::class, 'edit'])
+    ->where('id','[0-9]+')
+    ->name('bookmarks.edit');
+
+Route::post('/bookmarks/update', [BookmarksController::class, 'update'])
+    ->name('bookmarks.update');
 
 
 //レコードの表示、作成、更新、削除機能をまとめて設定する

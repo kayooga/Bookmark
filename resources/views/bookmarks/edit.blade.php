@@ -12,7 +12,9 @@
       <!-- Validation Errors -->
       {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
 
-      <form action="{{ route('user.bookmarks.store') }}" method="post">
+      <form action="{{ route('user.bookmarks.update',$bookmark->id) }}" method="post">
+        <input type="hidden" name="id" value="{{$bookmark->id}}">
+        @method('POST')
         @csrf
         @include('bookmarks.fields')
 

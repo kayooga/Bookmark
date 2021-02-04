@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bookmarks;
-use Illuminate\Http\Request;
+use App\Http\Requests\BookmarkReqest;
 
 class BookmarksController extends Controller
 {
@@ -35,7 +35,7 @@ class BookmarksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BookmarkReqest $request)
     {
         Bookmarks::create($request->all());
 
@@ -79,7 +79,7 @@ class BookmarksController extends Controller
      * @param  \App\Models\Models\Bookmarks  $bookmarks
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(BookmarkReqest $request)
     {
         $input = $request->all();
         $bookmark = Bookmarks::find($input['id']);

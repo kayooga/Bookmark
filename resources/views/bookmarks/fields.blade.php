@@ -1,8 +1,11 @@
+<!-- Validation Errors -->
+<x-auth-validation-errors class="mb-4" :errors="$errors" />
+
 <div class="form-group row">
-  <label for="inputTitle" class="col-sm-2 col-form-label">タイトル</label>
-  <div class="col-sm-10">
-      <input type="text" name="title" value="{{ $bookmark->title ?? '' }}" class="form-control" id="inputTitle">
-  </div>
+    <label for="inputTitle" class="col-sm-2 col-form-label">タイトル</label>
+    <div class="col-sm-10">
+        <input type="text" name="title" value="{{ $bookmark->title ?? '' }}" class="form-control" id="inputTitle">
+    </div>
 </div>
 
 <div class="form-group row">

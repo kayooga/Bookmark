@@ -1,19 +1,20 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
-    | Pagination Language Lines
+    | Password Reminder Language Lines
     |--------------------------------------------------------------------------
     |
-    | The following language lines are used by the paginator library to build
-    | the simple pagination links. You are free to change them to anything
-    | you want to customize your views to better match your application.
+    | The following language lines are the default lines which match reasons
+    | that are given by the password broker for a password update attempt
+    | has failed, such as for an invalid token or invalid new password.
     |
     */
 
-    'previous' => '&laquo; Previous',
-    'next' => 'Next &raquo;',
-
+    'password' => 'パスワードは6文字以上かつ確認フィールドと一致していなければなりません。',
+    'reset'    => 'パスワードをリセットしました。',
+    'sent'     => 'パスワードリマインダーを送信しました。',
+    'token'    => 'このパスワードリセットトークンは無効です。',
+    'user'     => 'このメールアドレスに一致するユーザーを見つけることが出来ませんでした。',
 ];

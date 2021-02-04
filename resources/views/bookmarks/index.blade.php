@@ -14,6 +14,7 @@
       <div class="mb-3">  
         <a href="{{ route('user.bookmarks.create') }}" class="btn-primary">新規登録</a>
       </div>
+      
         <table>
           <caption>ブックマーク一覧</caption>
           <thead>
@@ -30,6 +31,11 @@
               <td>
               <a href="{{ route('user.bookmarks.show',$bookmark->id) }}" class="btn btn-secondary btn-sm">表示</a>
                 <a href="{{ route('user.bookmarks.edit',$bookmark->id) }}" class="btn btn-secondary btn-sm">編集</a>
+                <form action="{{ route('user.bookmarks.destroy', $bookmark->id) }}" method="post">
+                  
+                  @csrf
+                  <button onclick="return confirm('本当に削除しますか？')" class="btn btn-secondary btn-sm">削除</button>
+                </form>
               </td>
             </tr>
               

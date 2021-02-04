@@ -104,6 +104,9 @@ Route::get('/bookmarks/edit/{id}', [BookmarksController::class, 'edit'])
 Route::post('/bookmarks/update', [BookmarksController::class, 'update'])
     ->name('bookmarks.update');
 
+Route::post('/bookmarks/destroy/{id}', [BookmarksController::class, 'destroy'])
+    ->name('bookmarks.destroy');
+
 
 //レコードの表示、作成、更新、削除機能をまとめて設定する
 // Route::resource('/bookmarks',BookmarksController::class);

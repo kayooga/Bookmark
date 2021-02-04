@@ -39,7 +39,10 @@ class BookmarksController extends Controller
     {
         Bookmarks::create($request->all());
 
-        return redirect()->route('user.bookmarks.index');
+        return redirect()
+                ->route('user.bookmarks.index')
+                ->with('status','ブックマークを登録しました');
+
     }
 
     /**
@@ -87,7 +90,10 @@ class BookmarksController extends Controller
         ]);
         $bookmark->save();
 
-        return redirect()->route('user.bookmarks.edit',$bookmark);
+        return redirect()
+                ->route('user.bookmarks.edit',$bookmark)
+                ->with('status','ブックマークを更新しました');
+
     }
 
     /**
@@ -96,8 +102,13 @@ class BookmarksController extends Controller
      * @param  \App\Models\Models\Bookmarks  $bookmarks
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bookmarks $bookmarks)
+    public function destroy($id)
     {
-        //
+        Bookmarks::destroy($id);
+
+        return redirect()
+                ->route('user.bookmarks.index')
+                //フラッシュメッセージ 任意のセッション名,表示するメッセージ
+                ->with('status','ブックマークを削除しました');
     }
 }

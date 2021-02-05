@@ -25,6 +25,6 @@
 <div class="form-group row">
     <div class="col-sm-10">
         <button type="submit" class="btn btn-primary">保存</button>
-        <a href="{{ route('user.bookmarks.index') }}" class="btn btn-secondary">一覧へ戻る</a>
+        <a href="{{ route('bookmarks.index') }}" class="btn btn-secondary">一覧へ戻る</a>
     </div>
 </div>

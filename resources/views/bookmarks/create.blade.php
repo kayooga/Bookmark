@@ -12,7 +12,7 @@
       <!-- Validation Errors -->
       {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
 
-      <form action="{{ route('user.bookmarks.store') }}" method="post">
+      <form action="{{ route('bookmarks.store') }}" method="post">
         @csrf
         @include('bookmarks.fields')
 

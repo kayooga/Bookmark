@@ -31,7 +31,7 @@
             </tr>
         </table>
         <div>
-          <a href="{{ route('user.bookmarks.index')}}" class="btn btn-secondary">戻る</a>
+          <a href="{{ route('bookmarks.index')}}" class="btn btn-secondary">戻る</a>
         </div>
       
   </x-auth-card>

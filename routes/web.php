@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookmarksController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +22,9 @@ use App\Http\Controllers\BookmarksController;
 Route::group(['middleware' => 'auth'], function () {
 
     
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
     
 Route::get('/', [BookmarksController::class, 'index'])
 ->name('bookmarks.index');
@@ -47,6 +48,29 @@ Route::post('/bookmarks/update', [BookmarksController::class, 'update'])
 
 Route::post('/bookmarks/destroy/{id}', [BookmarksController::class, 'destroy'])
 ->name('bookmarks.destroy');
+
+Route::get('/tags', [TagController::class, 'index'])
+->name('tags.index');
+
+Route::get('/tags/{id}', [TagController::class, 'show'])
+->where('id', '[0-9]+')
+    ->name('tags.show');
+    
+Route::get('/tags/create', [TagController::class, 'create'])
+->name('tags.create');
+
+Route::post('/tags/store', [TagController::class, 'store'])
+->name('tags.store');
+
+Route::get('/tags/edit/{id}', [TagController::class, 'edit'])
+    ->where('id','[0-9]+')
+    ->name('tags.edit');
+
+Route::post('/tags/update', [TagController::class, 'update'])
+->name('tags.update');
+
+Route::post('/tags/destroy/{id}', [TagController::class, 'destroy'])
+->name('tags.destroy');
 
 });
 //レコードの表示、作成、更新、削除機能をまとめて設定する

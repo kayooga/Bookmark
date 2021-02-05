@@ -12,30 +12,22 @@
       <!-- Validation Errors -->
       {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
         <table>
-          <caption>ブックマーク詳細</caption>
+          <caption>タグ詳細</caption>
             <tr>
               <th width="80">タイトル</th>
-              <td>{{ $bookmark->title }}</td>
-            </tr>
-            <tr>
-              <th>URL</th>
-              <td><a href="{{ $bookmark->url }}">{{ $bookmark->url }}</a></td>
-            </tr>
-            <tr>
-              <th>概要</th>
-              <td>{{ $bookmark->description }}</td>
+              <td>{{ $tag->title }}</td>
             </tr>
             <tr>
               <th>作成日</th>
-              <td>{{ $bookmark->created_at->format('Y年m月d日') }}</td>
+              <td>{{ $tag->created_at->format('Y年m月d日') }}</td>
             </tr>
             <tr>
               <th>編集日</th>
-              <td>{{ $bookmark->updated_at->format('Y年m月d日') }}</td>
+              <td>{{ $tag->updated_at->format('Y年m月d日') }}</td>
             </tr>
         </table>
         <div>
-          <a href="{{ route('bookmarks.index')}}" class="btn btn-secondary">戻る</a>
+          <a href="{{ route('tags.index')}}" class="btn btn-secondary">戻る</a>
         </div>
       
   </x-auth-card>

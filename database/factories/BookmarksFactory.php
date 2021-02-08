@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Bookmarks;
+use App\Models\Bookmark;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BookmarksFactory extends Factory
@@ -12,7 +12,7 @@ class BookmarksFactory extends Factory
      *
      * @var string
      */
-    protected $model = Bookmarks::class;
+    protected $model = Bookmark::class;
 
     /**
      * Define the model's default state.

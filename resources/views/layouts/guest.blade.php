@@ -18,8 +18,9 @@
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
+            @auth
             @include('layouts.navigation')
-
+            @endauth
             {{ $slot }}
         </div>
     </body>

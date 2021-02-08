@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BookmarksController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\TagController;
 
 /*
@@ -15,9 +15,9 @@ use App\Http\Controllers\TagController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/w', function () {
+    return view('welcome');
+});
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -26,27 +26,27 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
     
-Route::get('/', [BookmarksController::class, 'index'])
+Route::get('/', [BookmarkController::class, 'index'])
 ->name('bookmarks.index');
 
-Route::get('/bookmarks/{id}', [BookmarksController::class, 'show'])
+Route::get('/bookmarks/{id}', [BookmarkController::class, 'show'])
 ->where('id', '[0-9]+')
     ->name('bookmarks.show');
     
-Route::get('/bookmarks/create', [BookmarksController::class, 'create'])
+Route::get('/bookmarks/create', [BookmarkController::class, 'create'])
 ->name('bookmarks.create');
 
-Route::post('/bookmarks/store', [BookmarksController::class, 'store'])
+Route::post('/bookmarks/store', [BookmarkController::class, 'store'])
 ->name('bookmarks.store');
 
-Route::get('/bookmarks/edit/{id}', [BookmarksController::class, 'edit'])
+Route::get('/bookmarks/edit/{id}', [BookmarkController::class, 'edit'])
     ->where('id','[0-9]+')
     ->name('bookmarks.edit');
 
-Route::post('/bookmarks/update', [BookmarksController::class, 'update'])
+Route::post('/bookmarks/update', [BookmarkController::class, 'update'])
 ->name('bookmarks.update');
 
-Route::post('/bookmarks/destroy/{id}', [BookmarksController::class, 'destroy'])
+Route::post('/bookmarks/destroy/{id}', [BookmarkController::class, 'destroy'])
 ->name('bookmarks.destroy');
 
 Route::get('/tags', [TagController::class, 'index'])

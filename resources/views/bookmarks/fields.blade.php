@@ -16,15 +16,36 @@
 </div>
 
 <div class="form-group row">
-    <label for="inputDescription" class="col-sm-2 col-form-label">説明文</label>
+    <label for="inputDescription" class="col-sm-2 col-form-label">タグ</label>
     <div class="col-sm-10">
-        <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="inputDescription" rows="5">{{ $bookmark->description ?? '' }}</textarea>
+        @foreach ($tags as $key => $tag)
+        <div class="md:flex">
+            <input 
+                type="checkbox" 
+                name="tags[]" 
+                value="{{ $key }}" 
+                id="tag{{ $key }}"
+                @if (isset($bookmark->tags) && $bookmark->$tag)
+                    checked
+                @endif
+                >
+                <label for="tag{{ $key }}" class="form-check-label">{{ $tag }}</label>
+        </div>
+            
+        @endforeach
+    </div>
+</div>
+
+<div class="form-group row">
+    <label for="inputTag" class="col-sm-2 col-form-label">説明文</label>
+    <div class="col-sm-10">
+        <textarea name="description" class="" id="inputDescription" rows="5">{{ $bookmark->description ?? '' }}</textarea>
     </div>
 </div>
 
 <div class="form-group row">
     <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary">保存</button>
-        <a href="{{ route('bookmarks.index') }}" class="btn btn-secondary">一覧へ戻る</a>
+        <button type="submit" class="bg-indigo-700 font-semibold text-white py-2 px-4 rounded">保存</button>
+        <a href="{{ route('bookmarks.index') }}" class="bg-indigo-500 font-semibold text-white py-2 px-4 rounded">一覧へ戻る</a>
     </div>
 </div>

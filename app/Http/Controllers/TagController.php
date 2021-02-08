@@ -16,6 +16,8 @@ class TagController extends Controller
     {
         $tags = Tag::orderBy('id','desc')->paginate(15);
 
+        // ['tags' => $tags]
+        // keyとvalueが同じ名前だとcompact()で省略できる
         return view('tags.index',compact('tags'));
     }
 

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bookmarks;
+use App\Models\Bookmark;
+use App\Models\Tag;
 use App\Http\Requests\BookmarkReqest;
 
-class BookmarksController extends Controller
+class BookmarkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class BookmarksController extends Controller
      */
     public function index()
     {
-        $bookmarks = Bookmarks::orderBy('id','desc')->paginate(15);
+        $bookmarks = Bookmark::orderBy('id','desc')->paginate(15);
 
         return view('bookmarks.index',compact('bookmarks'));
     }
@@ -26,7 +27,10 @@ class BookmarksController extends Controller
      */
     public function create()
     {
-        return view('bookmarks.create');
+//チャックボックスで送られてきたデータをpluckでkey,valueの形にしてtoArrayで配列の形にする
+        $tags = Tag::pluck('title', 'id')->toArray();
+
+        return view('bookmarks.create', compact('tags'));
     }
 
     /**
@@ -37,7 +41,9 @@ class BookmarksController extends Controller
      */
     public function store(BookmarkReqest $request)
     {
-        Bookmarks::create($request->all());
+        $bookmark = Bookmark::create($request->all());
+        $bookmark->tags()->sync($request->tags);
+
 
         return redirect()
                 ->route('bookmarks.index')
@@ -48,13 +54,13 @@ class BookmarksController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Models\Bookmarks  $bookmarks
+     * @param  \App\Models\Models\Bookmark  $bookmark
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //findOrFail取得するデータがない場合は処理をとめてエラー画面を表示させる
-        $bookmark = Bookmarks::findOrFail($id);
+        $bookmark = Bookmark::findOrFail($id);
 
         return view('bookmarks.show',compact('bookmark'));
     }
@@ -62,34 +68,38 @@ class BookmarksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Models\Bookmarks  $bookmarks
+     * @param  \App\Models\Models\Bookmark  $bookmark
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $bookmark = Bookmarks::findOrFail($id);
+        $bookmark = Bookmark::findOrFail($id);
 
-        return view('bookmarks.edit',compact('bookmark'));
+        $tags = Tag::pluck('title', 'id')->toArray();
+        // dd($bookmark);
+        // dd($tags);
+        return view('bookmarks.edit',compact('bookmark', 'tags'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Models\Bookmarks  $bookmarks
+     * @param  \App\Models\Models\Bookmark  $bookmark
      * @return \Illuminate\Http\Response
      */
     public function update(BookmarkReqest $request)
     {
         $input = $request->all();
-        $bookmark = Bookmarks::find($input['id']);
+        $bookmark = Bookmark::find($input['id']);
         $bookmark->fill([
             'title' => $input['title'],
             'url' => $input['url'],
             'description' => $input['description']
         ]);
         $bookmark->save();
-
+        //syncリレーションのタグを保存
+        $bookmark->tags()->sync($request->tags);
         return redirect()
                 ->route('bookmarks.edit',$bookmark)
                 ->with('status','ブックマークを更新しました');
@@ -99,12 +109,14 @@ class BookmarksController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Models\Bookmarks  $bookmarks
+     * @param  \App\Models\Models\Bookmark  $bookmark
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Bookmark $bookmark, $id)
     {
-        Bookmarks::destroy($id);
+        Bookmark::destroy($id);
+        //detachリレーションの削除
+        $bookmark->tags()->detach();
 
         return redirect()
                 ->route('bookmarks.index')
